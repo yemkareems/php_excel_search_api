@@ -66,7 +66,7 @@ class SpreadSheet
                 }
             }
             if($includeInResult) {
-                $ret[] = $va;
+                $ret[] = [$va[0], $va[1], $va[2], $va[3], $va[4]];
             }
         }
         $reader->close();
