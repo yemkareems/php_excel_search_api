@@ -47,35 +47,17 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
-            'ram' => '64GB,4GB',
+            'ram' => '4GB',
             'diskType' => null,
             'location' => null,
         ];
         $data = $this->readSheet->readFile($params, $absPathOfFile);
-        $expectedResult = [
-            [
-                '0' => 'RH2288v32x Intel Xeon E5-2620v4',
-                '1' => '64GBDDR4',
-                '2' => '4x2TBSATA2',
-                '3' => 'AmsterdamAMS-01',
-                '4' => '€161.99',
-            ],
-            [
-                '0' => 'HP DL380pG82x Intel Xeon E5-2650',
-                '1' => '64GBDDR3',
-                '2' => '8x2TBSATA2',
-                '3' => 'AmsterdamAMS-01',
-                '4' => '€179.99',
-            ],
-            [
-                '0' => 'HP DL120G7Intel G850',
-                '1' => '4GBDDR3',
-                '2' => '4x1TBSATA2',
-                '3' => 'AmsterdamAMS-01',
-                '4' => '€39.99'
-            ]
-        ];
-        $this->assertEquals($expectedResult, $data);
+        print_r($data);
+        print "\n";
+        $expectedResult = [["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
+        print_r($expectedResult);
+        //exit;
+        $this->assertEquals($data, $expectedResult);
     }
 
     /**
@@ -87,21 +69,13 @@ class ReadSpreadSheetTest extends TestCase
     public function testReadFileWithStorageFilter() {
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
-            'storage' => '1TB',
+            'storage' => '4TB',
             'ram' => null,
             'diskType' => null,
             'location' => null,
         ];
         $data = $this->readSheet->readFile($params, $absPathOfFile);
-        $expectedResult = [
-            [
-                '0' => 'HP DL120G7Intel G850',
-                '1' => '4GBDDR3',
-                '2' => '4x1TBSATA2',
-                '3' => 'AmsterdamAMS-01',
-                '4' => '€39.99'
-            ]
-        ];
+        $expectedResult = [["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["Dell R210-IIIntel Xeon E3-1230v2","16GBDDR3","2x2TBSATA2","FrankfurtABC-01","€72.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
         $this->assertEquals($expectedResult, $data);
     }
 
