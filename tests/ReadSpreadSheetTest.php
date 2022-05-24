@@ -84,8 +84,6 @@ class ReadSpreadSheetTest extends TestCase
             'ram' => null,
             'diskType' => null,
             'location' => null,
-            'limit' => 5,
-            'offset' => 1,
         ];
         $data = $this->readSheet->readFile($params, $absPathOfFile);
         $expectedResult = [
@@ -94,7 +92,7 @@ class ReadSpreadSheetTest extends TestCase
                 '1' => '4GBDDR3',
                 '2' => '4x1TBSATA2',
                 '3' => 'AmsterdamAMS-01',
-                '4' => '€39.99',
+                '4' => '€39.99'
             ]
         ];
         $this->assertEquals($expectedResult, $data);
