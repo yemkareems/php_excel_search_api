@@ -47,16 +47,12 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
-            'ram' => '4GB',
+            'ram' => '4GB,64GB',
             'diskType' => null,
             'location' => null,
         ];
         $data = $this->readSheet->readFile($params, $absPathOfFile);
-        print_r($data);
-        print "\n";
-        $expectedResult = [["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
-        print_r($expectedResult);
-        //exit;
+        $expectedResult = [["RH2288v32x Intel Xeon E5-2620v4","64GBDDR4","4x2TBSATA2","AmsterdamAMS-01","€161.99"],["HP DL380pG82x Intel Xeon E5-2650","64GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€179.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
         $this->assertEquals($data, $expectedResult);
     }
 
