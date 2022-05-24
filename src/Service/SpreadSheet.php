@@ -35,6 +35,12 @@ class SpreadSheet
      */
     public function readFile($searchParams, $file) {
         $ret = [];
+        $searchKeysCount = 0;
+        foreach ($searchParams as $key => $searchValue) {
+            if(isset($searchValue) && $searchValue != '') {
+                $searchKeysCount++;
+            }
+        }
         $reader = ReaderEntityFactory::createReaderFromFile($file);
         $reader->open($file);
         foreach ($reader->getSheetIterator() as $sheet) {
@@ -45,27 +51,27 @@ class SpreadSheet
         foreach ($values as $va) {
             $ram = $va[1]; $storage = $va[2]; $location = $va[3];
             preg_match ('/^(\\d+GB).*/', $ram, $matches);
-            $includeInResult = false;
+            $includeInResult = 0;
             if(isset($searchParams['ram'][0]) && isset($matches[1])) {
                 if(in_array($matches[1],explode(",",$searchParams['ram'][0]))) {
-                    $includeInResult = true;
+                    $includeInResult++;
                 }
             }
             //location filter
             if(isset($searchParams['location']) && strstr($location, $searchParams['location'])) {
-                $includeInResult = true;
+                $includeInResult++;
             }
             //storage filter
             preg_match("/(.*)(TB|GB)(.*)/", $storage, $minMatches);
             if($minMatches) {
                 if(isset($searchParams['diskType']) && strstr($minMatches[3], $searchParams['diskType'])) {
-                    $includeInResult = true;
+                    $includeInResult++;
                 }
                 if(isset($searchParams['storage']) && strstr($minMatches[0], $searchParams['storage'])) {
-                    $includeInResult = true;
+                    $includeInResult++;
                 }
             }
-            if($includeInResult) {
+            if($includeInResult == $searchKeysCount) {
                 $ret[] = [$va[0], $va[1], $va[2], $va[3], $va[4]];
             }
         }
