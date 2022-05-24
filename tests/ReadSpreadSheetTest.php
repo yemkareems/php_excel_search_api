@@ -47,7 +47,7 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
-            'ram' => ['64GB,4GB'],
+            'ram' => '64GB,4GB',
             'diskType' => null,
             'location' => null,
         ];

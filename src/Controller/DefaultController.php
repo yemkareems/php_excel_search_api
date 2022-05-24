@@ -18,7 +18,7 @@ class DefaultController
 
         $searchParams = [
             'storage' => $storageSearchCriteria,
-            'ram' => [$ramSearchCriteria],
+            'ram' => $ramSearchCriteria,
             'diskType' => $hardDiskSearchCriteria,
             'location' => $locationSearchCriteria,
         ];
