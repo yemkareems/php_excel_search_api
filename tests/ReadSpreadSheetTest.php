@@ -47,7 +47,7 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
-            'ram' => ['64GB'],
+            'ram' => ['64GB,4GB'],
             'diskType' => null,
             'location' => null,
         ];
@@ -66,6 +66,13 @@ class ReadSpreadSheetTest extends TestCase
                 '2' => '8x2TBSATA2',
                 '3' => 'AmsterdamAMS-01',
                 '4' => '€179.99',
+            ],
+            [
+                '0' => 'HP DL120G7Intel G850',
+                '1' => '4GBDDR3',
+                '2' => '4x1TBSATA2',
+                '3' => 'AmsterdamAMS-01',
+                '4' => '€39.99'
             ]
         ];
         $this->assertEquals($expectedResult, $data);
