@@ -23,7 +23,6 @@ namespace App\Tests;
 
 use App\Service\SpreadSheet;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 class ReadSpreadSheetTest extends TestCase
 {
@@ -37,13 +36,7 @@ class ReadSpreadSheetTest extends TestCase
 
 
 
-    /**
-     * Test by passing only 1 filter to the API.
-     * The return from the API call will have 2 more
-     * indices in the array. So the exact content is
-     * the count(dataFetched) - 2.
-     */
-    public function testReadFileWith1Filter() {
+    public function testReadFileWithRamFilter() {
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
@@ -56,31 +49,19 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($data, $expectedResult);
     }
 
-    /**
-     * Test by passing only storage filter to the API.
-     * The return from the API call will have 2 more
-     * indices in the array. So the exact content is
-     * the count(dataFetched) - 2.
-     */
     public function testReadFileWithStorageFilter() {
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
-            'storage' => '4TB',
+            'storage' => '1TB-4TB',
             'ram' => null,
             'diskType' => null,
             'location' => null,
         ];
         $data = $this->readSheet->readFile($params, $absPathOfFile);
-        $expectedResult = [["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["Dell R210-IIIntel Xeon E3-1230v2","16GBDDR3","2x2TBSATA2","FrankfurtABC-01","€72.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
+        $expectedResult = [["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["Dell R210-IIIntel Xeon E3-1230v2","16GBDDR3","2x2TBSATA2","FrankfurtABC-01","€72.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
         $this->assertEquals($expectedResult, $data);
     }
 
-    /**
-     * Test by passing only harddisk filter to the API.
-     * The return from the API call will have 2 more
-     * indices in the array. So the exact content is
-     * the count(dataFetched) - 2.
-     */
     public function testReadFileHarddiskFilter() {
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
@@ -130,13 +111,7 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($expectedResult, $data);
     }
 
-    /**
-     * Test by passing only location filter to the API.
-     * The return from the API call will have 2 more
-     * indices in the array. So the exact content is
-     * the count(dataFetched) - 2.
-     */
-    public function testReadFile3Filter() {
+    public function testReadFileWithLocationFilter() {
         $absPathOfFile = __DIR__ . '/'. self::FILENAME;
         $params = [
             'storage' => null,
@@ -227,5 +202,19 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($expectedResult, $data);
     }
 
+    public function testReadFileWithAllFilter()
+    {
+        $absPathOfFile = __DIR__ . '/' . self::FILENAME;
+        $params = [
+            'storage' => "100GB-1TB",
+            'ram' => '128GB,64GB',
+            'diskType' => 'SSD',
+            'location' => 'SingaporeSIN-01',
+        ];
+        $data = $this->readSheet->readFile($params, $absPathOfFile);
 
-}
+        $expected = [["Dell R730XD2x Intel Xeon E5-2667v4","128GBDDR4","2x120GBSSD","SingaporeSIN-01","€364.99"]];
+        $this->assertEquals($expected, $data);
+    }
+
+    }

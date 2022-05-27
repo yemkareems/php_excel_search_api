@@ -84,6 +84,7 @@ class SpreadSheet
     }
 
     private function filterStorage($matches, $filterValue) {
+
         $filterValues = explode('-', $filterValue);
         $minVal = $filterValues[0];
         $maxVal = null;
@@ -97,11 +98,8 @@ class SpreadSheet
             /**
              * Check if the storage falls under the range provided
              */
-            if ($maxVal !== null) {
-                return $this->getStorageRangeResult($computedStorage, $matches[2], $minVal, $maxVal);
-            }
-            $computedStorage .= $matches[2];
-            return ($computedStorage === $filterValue);
+            return $this->getStorageRangeResult($computedStorage, $matches[2], $minVal, $maxVal);
+
         }
         return false;
     }
@@ -151,11 +149,15 @@ class SpreadSheet
         if (isset($minMatches[1]) && isset($minMatches[2])) {
             if ($minMatches[2] === 'TB') {
                 $convertedMinGB = 1024 * $minMatches[1];
+            } else {
+                $convertedMinGB = $minMatches[1];
             }
         }
         if (isset($maxMatches[1]) && isset($maxMatches[2])) {
             if ($maxMatches[2] === 'TB') {
                 $convertedMaxGB = 1024 * $maxMatches[1];
+            } else {
+                $convertedMaxGB = $maxMatches[1];
             }
         }
 
@@ -169,8 +171,6 @@ class SpreadSheet
         } else {
             if ($computedStorage >= $convertedMinGB) {
                 $result = true;
-            } else {
-                $result = false;
             }
         }
 
@@ -182,7 +182,7 @@ class SpreadSheet
                 $result = true;
             }
         } else {
-            if ($computedStorage <= $convertedMaxGB) {
+            if ($result && $computedStorage <= $convertedMaxGB) {
                 $result = true;
             } else {
                 $result = false;
