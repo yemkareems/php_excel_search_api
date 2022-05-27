@@ -2,30 +2,51 @@
 
 namespace App\Controller;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Service\SpreadSheet;
-class DefaultController
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class DefaultController extends AbstractController
 {
 
-    public function index(Request $request){
+    public function index(SpreadSheet $spreadSheet, Request $request){
 
-        $storageSearchCriteria = $request->get('storage');
-        $ramSearchCriteria = $request->get('ram');
-        $hardDiskSearchCriteria = $request->get('diskType');
-        $locationSearchCriteria = $request->get('location');
+        $spreadSheetService = $spreadSheet;
 
         $searchParams = [
-            'storage' => $storageSearchCriteria,
-            'ram' => $ramSearchCriteria,
-            'diskType' => $hardDiskSearchCriteria,
-            'location' => $locationSearchCriteria,
+            'storage' => $request->get('storage'),
+            'ram' => $request->get('ram'),
+            'diskType' => $request->get('diskType'),
+            'location' => $request->get('location'),
         ];
+
+        $validator = Validation::createValidator();
+        $constraint = new Assert\Collection(array(
+            // the keys correspond to the keys in the input array
+            'storage' => new Assert\Length(array('min' => 1, 'max' => 255)),
+            'ram' => new Assert\Length(array('min' => 1, 'max' => 255)),
+            'diskType' => new Assert\Length(array('min' => 1, 'max' => 255)),
+            'location' => new Assert\Length(array('min' => 1, 'max' => 255)),
+        ));
+        $violations = $validator->validate($searchParams, $constraint);
+        if ($violations->count() > 0) {
+            return new JsonResponse(["error" => (string)$violations], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
         $filePath = getcwd().'/../third_party/file.xlsx';
 
-        $spreadSheet = new SpreadSheet();
-        $data = $spreadSheet->readFile($searchParams, $filePath);
-        return new JsonResponse($data);
+        try {
+            $data = $spreadSheetService->readFile($searchParams, $filePath);
+            if($data) {
+                return new JsonResponse($data, Response::HTTP_OK);
+            } else {
+                return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_OK);
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

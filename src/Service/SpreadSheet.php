@@ -1,6 +1,5 @@
 <?php
 /**
- * @author Sujith Haridasan <sujith.h@gmail.com>
  *
  * @copyright Copyright (c) 2020
  * @license AGPL-3.0
@@ -21,7 +20,10 @@
 namespace App\Service;
 
 
+use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use Box\Spout\Reader\Exception\ReaderNotOpenedException;
 
 class SpreadSheet
 {
@@ -32,8 +34,11 @@ class SpreadSheet
      * @param $searchParams
      * @param $file
      * @return array
+     * @throws UnsupportedTypeException
+     * @throws IOException
+     * @throws ReaderNotOpenedException
      */
-    public function readFile($searchParams, $file) {
+    public function readFile($searchParams, $file): array {
         $ret = [];
         $searchKeysCount = 0;
         foreach ($searchParams as $key => $searchValue) {
@@ -42,7 +47,7 @@ class SpreadSheet
             }
         }
         $reader = ReaderEntityFactory::createReaderFromFile($file);
-        $reader->open($file);
+        $reader->open($file);$values = [];
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $row) {
                 $values[] = $row->toArray();
