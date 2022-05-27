@@ -41,9 +41,9 @@ class DefaultController extends AbstractController
         try {
             $data = $spreadSheetService->readFile($searchParams, $filePath);
             if($data) {
-                return new JsonResponse($data, Response::HTTP_OK);
+                return new JsonResponse(['success' => 'ok', 'data' => $data], Response::HTTP_OK);
             } else {
-                return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_OK);
+                return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
