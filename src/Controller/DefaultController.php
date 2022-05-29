@@ -36,7 +36,7 @@ class DefaultController extends AbstractController
         if ($violations->count() > 0) {
             return new JsonResponse(["error" => (string)$violations], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        $dataSource = getcwd().'/../dataSource/';
+        $dataSource = $this->getParameter('dataSource');
 
         try {
             $data = $spreadSheetService->searchDataSource($searchParams, $dataSource);
