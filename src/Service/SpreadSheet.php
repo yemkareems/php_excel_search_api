@@ -94,7 +94,13 @@ class SpreadSheet
         return $ret;
     }
 
-    private function filterStorage($matches, $filterValue): bool {
+    /**
+     * Check if storage falls in the given range
+     * @param array $matches
+     * @param string $filterValue
+     * @return bool
+     */
+    private function filterStorage(array $matches, string $filterValue): bool {
 
         $filterValues = explode('-', $filterValue);
         $minVal = $filterValues[0];
@@ -103,15 +109,14 @@ class SpreadSheet
             $maxVal  = $filterValues[1];
         }
 
-
         if (isset($matches[1]) && isset($matches[2])) {
             $computedStorage = $this->computeStorage($matches[1]);
             /**
              * Check if the storage falls under the range provided
              */
             return $this->getStorageRangeResult($computedStorage, $matches[2], $minVal, $maxVal);
-
         }
+
         return false;
     }
 
@@ -126,6 +131,7 @@ class SpreadSheet
         foreach ($storageArray as $value) {
             $computedValue = $computedValue * $value;
         }
+
         return $computedValue;
     }
 
