@@ -32,7 +32,7 @@ class SpreadSheet
      * Read the spreadsheet file and return the json data
      *
      * @param $searchParams
-     * @param $file
+     * @param $dataSource
      * @return array
      * @throws UnsupportedTypeException
      * @throws IOException
@@ -92,7 +92,7 @@ class SpreadSheet
         return $ret;
     }
 
-    private function filterStorage($matches, $filterValue) {
+    private function filterStorage($matches, $filterValue): bool {
 
         $filterValues = explode('-', $filterValue);
         $minVal = $filterValues[0];
@@ -118,7 +118,7 @@ class SpreadSheet
      * @param string $storageVal
      * @return int
      */
-    private function computeStorage($storageVal) {
+    private function computeStorage(string $storageVal): int {
         $computedValue = 1;
         $storageArray = explode("x", $storageVal);
         foreach ($storageArray as $value) {
@@ -138,7 +138,7 @@ class SpreadSheet
      * @param null|string $maxVal
      * @return bool
      */
-    private function getStorageRangeResult($computedStorage, $compStorageType, $minVal, $maxVal) {
+    private function getStorageRangeResult(int $computedStorage, string $compStorageType, ? string $minVal, ? string $maxVal): bool {
         $result = false;
         preg_match("/^(\d+)(GB|TB)/", $minVal, $minMatches);
         preg_match("/^(\d+)(GB|TB)/", $maxVal, $maxMatches);

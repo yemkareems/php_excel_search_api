@@ -13,9 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DefaultController extends AbstractController
 {
 
-    public function index(SpreadSheet $spreadSheet, Request $request){
-
-        $spreadSheetService = $spreadSheet;
+    public function index(SpreadSheet $spreadSheetService, Request $request){
 
         $searchParams = [
             'storage' => $request->get('storage'),
