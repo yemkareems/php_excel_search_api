@@ -13,7 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DefaultController extends AbstractController
 {
 
-    public function index(SpreadSheet $spreadSheetService, Request $request){
+    public function index(SpreadSheet $spreadSheetService, Request $request): JsonResponse
+    {
 
         $searchParams = [
             'storage' => $request->get('storage'),
