@@ -62,8 +62,9 @@ class SpreadSheet
             $ram = $va[1]; $storage = $va[2]; $location = $va[3];
             preg_match ('/^(\\d+GB).*/', $ram, $matches);
             $includeInResult = 0;
+            //ram filter
             if(isset($searchParams['ram']) && isset($matches[1])) {
-                if(in_array($matches[1],explode(",",$searchParams['ram']))) {
+                if(in_array($matches[1], explode(",",$searchParams['ram']))) {
                     $includeInResult++;
                 }
             }
@@ -71,12 +72,13 @@ class SpreadSheet
             if(isset($searchParams['location']) && strstr($location, $searchParams['location'])) {
                 $includeInResult++;
             }
-            //storage filter
             preg_match("/(.*)(TB|GB)(.*)/", $storage, $minMatches);
             if($minMatches) {
+                //disk type filter
                 if(isset($searchParams['diskType']) && strstr($minMatches[3], $searchParams['diskType'])) {
                     $includeInResult++;
                 }
+                //storage filter
                 if(isset($searchParams['storage'])) {
                     $storageFilter = $this->filterStorage($minMatches, $searchParams['storage']);
                     if ($storageFilter) {
