@@ -38,7 +38,8 @@ class SpreadSheet
      * @throws IOException
      * @throws ReaderNotOpenedException
      */
-    public function readFile($searchParams, $file): array {
+    public function searchDataSource($searchParams, $dataSource): array {
+        $filesList = array_values(array_diff(scandir($dataSource), array('.', '..')));
         $ret = [];
         $searchKeysCount = 0;
         foreach ($searchParams as $key => $searchValue) {
@@ -46,12 +47,16 @@ class SpreadSheet
                 $searchKeysCount++;
             }
         }
-        $reader = ReaderEntityFactory::createReaderFromFile($file);
-        $reader->open($file);$values = [];
-        foreach ($reader->getSheetIterator() as $sheet) {
-            foreach ($sheet->getRowIterator() as $row) {
-                $values[] = $row->toArray();
+        $values = [];
+        foreach ($filesList as $file) {
+            $reader = ReaderEntityFactory::createReaderFromFile($dataSource . $file);
+            $reader->open($dataSource . $file);
+            foreach ($reader->getSheetIterator() as $sheet) {
+                foreach ($sheet->getRowIterator() as $row) {
+                    $values[] = $row->toArray();
+                }
             }
+            $reader->close();
         }
         foreach ($values as $va) {
             $ram = $va[1]; $storage = $va[2]; $location = $va[3];
@@ -83,7 +88,6 @@ class SpreadSheet
                 $ret[] = [$va[0], $va[1], $va[2], $va[3], $va[4]];
             }
         }
-        $reader->close();
 
         return $ret;
     }

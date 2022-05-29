@@ -36,10 +36,10 @@ class DefaultController extends AbstractController
         if ($violations->count() > 0) {
             return new JsonResponse(["error" => (string)$violations], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        $filePath = getcwd().'/../third_party/file.xlsx';
+        $dataSource = getcwd().'/../dataSource/';
 
         try {
-            $data = $spreadSheetService->readFile($searchParams, $filePath);
+            $data = $spreadSheetService->searchDataSource($searchParams, $dataSource);
             if($data) {
                 return new JsonResponse(['success' => 'ok', 'data' => $data], Response::HTTP_OK);
             } else {
