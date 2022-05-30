@@ -38,6 +38,8 @@ http://127.0.0.1:8000/xlsx?storage=
 
 {"error":"Array[storage]:\n    This value is too short. It should have 1 character or more. (code 9ff3fdc4-b214-49db-8718-39c315e33d45)\n"}
 
+http://127.0.0.1:8000/xlsx?storage=2TB-2TB
+
 http://127.0.0.1:8000/xlsx?ram=16GB,32GB
 
 http://127.0.0.1:8000/xlsx?location=San%20FranciscoSFO-12
