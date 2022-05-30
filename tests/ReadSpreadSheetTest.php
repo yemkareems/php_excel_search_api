@@ -1,6 +1,5 @@
 <?php
 /**
- * @author Sujith Haridasan <sujith.h@gmail.com>
  *
  * @copyright Copyright (c) 2020
  * @license AGPL-3.0
