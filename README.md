@@ -21,3 +21,5 @@ http://127.0.0.1:8000/xlsx?location=Washington%20D.C.WDC-01
 http://127.0.0.1:8000/xlsx?storage=1TB
 
 Change the search criteria above to search from the list
+
+Run ./bin/phpunit in root directory to run test cases
