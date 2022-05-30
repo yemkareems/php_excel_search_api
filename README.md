@@ -8,6 +8,8 @@ All these files ll be parsed and results ll be shown
 
 For parsing have used box/spout library
 
+It can parse both xlsx and csv files also
+
 All .xlsx files in dataSource directory will be read and parsed to show the search results. 
 
 If in future we need to add more files we just need to place the file in the location and it will be parsed automatically. 
