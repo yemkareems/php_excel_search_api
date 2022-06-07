@@ -46,7 +46,7 @@ class SpreadSheet
             if(isset($searchValue) && $searchValue != '' && $key != 'storageTo') {
                 $searchKeysCount++;
             }
-            if($key == 'storageTo' && $searchParams['storageFrom'] == '') {
+            if($key == 'storageTo' && is_null($searchParams['storageFrom']) && !is_null($searchParams['storageTo'])) {
                 $searchKeysCount++;
             }
         }
