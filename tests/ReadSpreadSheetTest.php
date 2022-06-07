@@ -39,7 +39,7 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
             'storage' => null,
-            'ram' => '4GB,64GB',
+            'ram' => ['4GB', '64GB'],
             'diskType' => null,
             'location' => null,
         ];
@@ -92,7 +92,7 @@ class ReadSpreadSheetTest extends TestCase
         $absPathOfFile = __DIR__ . '/' . self::TEST_DATA_SOURCE;
         $params = [
             'storage' => "100GB-1TB",
-            'ram' => '128GB,64GB',
+            'ram' => ['128GB', '64GB'],
             'diskType' => 'SSD',
             'location' => 'SingaporeSIN-01',
         ];

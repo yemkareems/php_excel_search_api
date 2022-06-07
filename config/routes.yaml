@@ -4,4 +4,4 @@
 
 index:
     path: /xlsx
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\SearchController::searchAction

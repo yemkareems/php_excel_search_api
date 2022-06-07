@@ -64,7 +64,7 @@ class SpreadSheet
             $includeInResult = 0;
             //ram filter
             if(isset($searchParams['ram']) && isset($matches[1])) {
-                if(in_array($matches[1], explode(",",$searchParams['ram']))) {
+                if(in_array($matches[1], $searchParams['ram'])) {
                     $includeInResult++;
                 }
             }

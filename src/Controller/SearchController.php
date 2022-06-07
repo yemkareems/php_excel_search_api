@@ -10,10 +10,10 @@ use App\Service\SpreadSheet;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DefaultController extends AbstractController
+class SearchController extends AbstractController
 {
 
-    public function index(SpreadSheet $spreadSheetService, Request $request): JsonResponse
+    public function searchAction(SpreadSheet $spreadSheetService, Request $request): JsonResponse
     {
 
         $searchParams = [
@@ -27,9 +27,9 @@ class DefaultController extends AbstractController
         $constraint = new Assert\Collection(array(
             // the keys correspond to the keys in the input array
             'storage' => new Assert\Length(array('min' => 1, 'max' => 255)),
-            'ram' => new Assert\Length(array('min' => 1, 'max' => 255)),
-            'diskType' => new Assert\Length(array('min' => 1, 'max' => 255)),
-            'location' => new Assert\Length(array('min' => 1, 'max' => 255)),
+            'ram' => new Assert\Choice(['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB'], NULL, TRUE),
+            'diskType' => new Assert\Choice(['SAS', 'SATA', 'SSD']),
+            'location' => new Assert\Choice(['AmsterdamAMS-01', 'DallasDAL-10', 'FrankfurtFRA-10', 'Hong KongHKG-10', 'San FranciscoSFO-12', 'SingaporeSIN-11', 'Washington D.C.WDC-01']),
         ));
         $violations = $validator->validate($searchParams, $constraint);
         if ($violations->count() > 0) {
