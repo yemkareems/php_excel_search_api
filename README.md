@@ -24,7 +24,7 @@ Response json will have a success or error key based on the condition. If it is 
 
 Browse
 
-http://127.0.0.1:8000/xlsx?ram=16GB,32GB&location=San%20FranciscoSFO-12&diskType=SATA&storage=1TB-2TB
+http://127.0.0.1:8000/xlsx?ram[]=16GB&ram[]=32GB&location=San%20FranciscoSFO-12&diskType=SATA&storage=1TB-2TB
 
 Sample Response
 
@@ -40,7 +40,7 @@ http://127.0.0.1:8000/xlsx?storage=
 
 http://127.0.0.1:8000/xlsx?storage=2TB-2TB
 
-http://127.0.0.1:8000/xlsx?ram=16GB,32GB
+http://127.0.0.1:8000/xlsx?ram[]=16GB&ram[]=32GB
 
 http://127.0.0.1:8000/xlsx?location=San%20FranciscoSFO-12
 
