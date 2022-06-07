@@ -38,7 +38,8 @@ class ReadSpreadSheetTest extends TestCase
     public function testReadFileWithRamFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
-            'storage' => null,
+            'storageFrom' => null,
+            'storageTo' => null,
             'ram' => ['4GB', '64GB'],
             'diskType' => null,
             'location' => null,
@@ -51,7 +52,8 @@ class ReadSpreadSheetTest extends TestCase
     public function testReadFileWithStorageFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
-            'storage' => '1TB-4TB',
+            'storageFrom' => '1TB',
+            'storageTo' => '4TB',
             'ram' => null,
             'diskType' => null,
             'location' => null,
@@ -64,7 +66,8 @@ class ReadSpreadSheetTest extends TestCase
     public function testReadFileHarddiskFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
-            'storage' => null,
+            'storageFrom' => null,
+            'storageTo' => null,
             'ram' => null,
             'diskType' => 'SSD',
             'location' => null,
@@ -77,7 +80,8 @@ class ReadSpreadSheetTest extends TestCase
     public function testReadFileWithLocationFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
-            'storage' => null,
+            'storageFrom' => null,
+            'storageTo' => null,
             'ram' => null,
             'diskType' => null,
             'location' => 'AmsterdamAMS-01',
@@ -91,7 +95,8 @@ class ReadSpreadSheetTest extends TestCase
     {
         $absPathOfFile = __DIR__ . '/' . self::TEST_DATA_SOURCE;
         $params = [
-            'storage' => "100GB-1TB",
+            'storageFrom' => '100GB',
+            'storageTo' => '1TB',
             'ram' => ['128GB', '64GB'],
             'diskType' => 'SSD',
             'location' => 'SingaporeSIN-01',

@@ -43,7 +43,10 @@ class SpreadSheet
         $ret = [];
         $searchKeysCount = 0;
         foreach ($searchParams as $key => $searchValue) {
-            if(isset($searchValue) && $searchValue != '') {
+            if(isset($searchValue) && $searchValue != '' && $key != 'storageTo') {
+                $searchKeysCount++;
+            }
+            if($key == 'storageTo' && $searchParams['storageFrom'] == '') {
                 $searchKeysCount++;
             }
         }
@@ -79,8 +82,8 @@ class SpreadSheet
                     $includeInResult++;
                 }
                 //storage filter
-                if(isset($searchParams['storage'])) {
-                    $storageFilter = $this->filterStorage($minMatches, $searchParams['storage']);
+                if(isset($searchParams['storageFrom']) || isset($searchParams['storageTo'])) {
+                    $storageFilter = $this->filterStorage($minMatches, $searchParams['storageFrom'], $searchParams['storageTo']);
                     if ($storageFilter) {
                         $includeInResult++;
                     }
@@ -100,15 +103,9 @@ class SpreadSheet
      * @param string $filterValue
      * @return bool
      */
-    private function filterStorage(array $matches, string $filterValue): bool {
+    private function filterStorage(array $matches, ? string $minVal, ? string $maxVal): bool {
 
-        $filterValues = explode('-', $filterValue);
-        $minVal = $filterValues[0];
-        $maxVal = null;
-        if (isset($filterValues[1])) {
-            $maxVal  = $filterValues[1];
-        }
-
+        $minVal = is_null($minVal) ? '0GB' : $minVal;
         if (isset($matches[1]) && isset($matches[2])) {
             $computedStorage = $this->computeStorage($matches[1]);
             /**
@@ -150,7 +147,6 @@ class SpreadSheet
         $result = false;
         preg_match("/^(\d+)(GB|TB)/", $minVal, $minMatches);
         preg_match("/^(\d+)(GB|TB)/", $maxVal, $maxMatches);
-
         /**
          * Convert the computed storage to GB
          */
@@ -177,7 +173,6 @@ class SpreadSheet
                 $convertedMaxGB = $maxMatches[1];
             }
         }
-
         /**
          * If the min range is in GB
          */

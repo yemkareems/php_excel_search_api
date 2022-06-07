@@ -17,7 +17,8 @@ class SearchController extends AbstractController
     {
 
         $searchParams = [
-            'storage' => $request->get('storage'),
+            'storageFrom' => $request->get('storageFrom'),
+            'storageTo' => $request->get('storageTo'),
             'ram' => $request->get('ram'),
             'diskType' => $request->get('diskType'),
             'location' => $request->get('location'),
@@ -44,8 +45,9 @@ class SearchController extends AbstractController
     private function getValidationConstraints(): Assert\Collection
     {
         return new Assert\Collection(array(
-            'storage' => new Assert\Length(array('min' => 1, 'max' => 255)),
-            'ram' => new Assert\Choice(['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB'], null, true),
+            'storageFrom' => new Assert\Choice(['0GB', '250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB', '100TB']),
+            'storageTo' => new Assert\Choice(['0GB', '250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB', '100TB']),
+            'ram' => new Assert\Choice(['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB', '128GB'], null, true),
             'diskType' => new Assert\Choice(['SAS', 'SATA', 'SSD']),
             'location' => new Assert\Choice(['AmsterdamAMS-01', 'DallasDAL-10', 'FrankfurtFRA-10', 'Hong KongHKG-10', 'San FranciscoSFO-12', 'SingaporeSIN-11', 'Washington D.C.WDC-01']),
         ));
