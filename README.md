@@ -48,6 +48,8 @@ http://127.0.0.1:8000/xlsx?storageFrom=250GB&storageTo=1TB
 
 http://127.0.0.1:8000/xlsx?storageTo=1TB
 
+http://127.0.0.1:8000/xlsx?storageTo=500GB
+
 Change the search criteria above to search from the list
 
 Run ./bin/phpunit in root directory to run test cases
