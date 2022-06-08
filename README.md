@@ -36,11 +36,11 @@ http://127.0.0.1:8000/xlsx?storageFrom=100TB
 
 http://127.0.0.1:8000/xlsx?storageFrom=
 
-{"error":"Array[storageFrom]:\n    This value is too short. It should have 1 character or more. (code 9ff3fdc4-b214-49db-8718-39c315e33d45)\n"}
+{"error":{"[storageFrom]":["The value you selected is not a valid choice."]}}
 
 http://127.0.0.1:8000/xlsx?ram[]=16GB&ram[]=32GB
 
-http://127.0.0.1:8000/xlsx?location=San%20FranciscoSFO-12
+http://127.0.0.1:8000/xlsx?location=AmsterdamAMS-01
 
 http://127.0.0.1:8000/xlsx?diskType=SSD
 
