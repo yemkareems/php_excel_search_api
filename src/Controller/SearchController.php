@@ -41,7 +41,6 @@ class SearchController extends AbstractController
                 return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } catch (\Exception $e) {
-            var_dump($e);
             return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
