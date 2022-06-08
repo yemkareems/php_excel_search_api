@@ -12,6 +12,12 @@ use App\Validator\InputValidator;
 class SearchController extends AbstractController
 {
 
+    /**
+     * @param SpreadSheet $spreadSheetService
+     * @param Request $request
+     * @param InputValidator $validator
+     * @return JsonResponse
+     */
     public function searchAction(SpreadSheet $spreadSheetService, Request $request, InputValidator $validator): JsonResponse
     {
 
@@ -30,15 +36,16 @@ class SearchController extends AbstractController
         }
         $dataSource = getcwd().'/../'.$this->getParameter('dataSource').'/';
         try {
-            $data = $spreadSheetService->searchDataSource($searchParams, $dataSource);
-            if($data) {
-                return new JsonResponse(['success' => 'ok', 'data' => $data], Response::HTTP_OK);
-            } else {
+            $searchResult = $spreadSheetService->searchDataSource($searchParams, $dataSource);
+            if(0 === count($searchResult)) {
                 return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } catch (\Exception $e) {
+            var_dump($e);
             return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+        return new JsonResponse(['success' => 'ok', 'searchResult' => $searchResult], Response::HTTP_OK);
     }
 
 }

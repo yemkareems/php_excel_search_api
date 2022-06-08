@@ -100,21 +100,16 @@ class SpreadSheet
     /**
      * Check if storage falls in the given range
      * @param array $matches
-     * @param string $filterValue
+     * @param string|null $minVal
+     * @param string|null $maxVal
      * @return bool
      */
     private function filterStorage(array $matches, ? string $minVal, ? string $maxVal): bool {
 
         $minVal = is_null($minVal) ? '0GB' : $minVal;
-        if (isset($matches[1]) && isset($matches[2])) {
-            $computedStorage = $this->computeStorage($matches[1]);
-            /**
-             * Check if the storage falls under the range provided
-             */
-            return $this->getStorageRangeResult($computedStorage, $matches[2], $minVal, $maxVal);
-        }
+        $computedStorage = $this->computeStorage($matches[1]);
+        return $this->getStorageRangeResult($computedStorage, $matches[2], $minVal, $maxVal);
 
-        return false;
     }
 
     /**
@@ -150,47 +145,29 @@ class SpreadSheet
         /**
          * Convert the computed storage to GB
          */
-        if ($compStorageType === 'TB') {
-            $computedStorage = $computedStorage * 1024;
-        }
+        $computedStorage = $compStorageType === 'TB' ? $computedStorage * 1024: $computedStorage;
 
         /**
          * Convert TB to GB
          */
-        $convertedMinGB = 0;
-        $convertedMaxGB = 0;
+        $convertedMinGB = $minMatches[1];
+        $convertedMaxGB = $maxMatches[1] ?? 0;
         if (isset($minMatches[1]) && isset($minMatches[2])) {
-            if ($minMatches[2] === 'TB') {
-                $convertedMinGB = 1024 * $minMatches[1];
-            } else {
-                $convertedMinGB = $minMatches[1];
-            }
+            $convertedMinGB = $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
         }
         if (isset($maxMatches[1]) && isset($maxMatches[2])) {
-            if ($maxMatches[2] === 'TB') {
-                $convertedMaxGB = 1024 * $maxMatches[1];
-            } else {
-                $convertedMaxGB = $maxMatches[1];
-            }
+            $convertedMaxGB = $maxMatches[2] === 'TB' ? 1024 * $maxMatches[1]: $maxMatches[1];
         }
         /**
          * If the min range is in GB
          */
-        if ($convertedMinGB === 0) {
-            if ((isset($minMatches[1])) && $computedStorage >= $minMatches[1]) {
-                $result = true;
-            }
-        } else {
-            if ($computedStorage >= $convertedMinGB) {
-                $result = true;
-            }
-        }
+        $result = $computedStorage >= $convertedMinGB;
 
         /**
          * if the max range is in GB
          */
         if ($convertedMaxGB === 0) {
-            if ((isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
+            if ($result && (isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
                 $result = true;
             }
         } else {
