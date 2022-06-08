@@ -15,17 +15,17 @@ class InputValidator
             'diskType' => new Assert\Choice(['SAS', 'SATA', 'SSD']),
             'location' => new Assert\Choice(['AmsterdamAMS-01', 'DallasDAL-10', 'FrankfurtFRA-10', 'Hong KongHKG-10', 'San FranciscoSFO-12', 'SingaporeSIN-11', 'Washington D.C.WDC-01']),
         ));
-        $message = [];
+        $messages = [];
 
         $validator = Validation::createValidator();
         $violations = $validator->validate($validateInput, $constraints);
         if($violations->count() > 0){
             foreach ($violations as $violation) {
-                $message[$violation->getPropertyPath()][] = $violation->getMessage();
+                $messages[$violation->getPropertyPath()][] = $violation->getMessage();
             }
         }
 
-        return $message;
+        return $messages;
     }
 
 }
