@@ -44,7 +44,7 @@ class SearchController extends AbstractController
             return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return new JsonResponse(['success' => 'ok', 'searchResult' => $searchResult], Response::HTTP_OK);
+        return new JsonResponse(['success' => 'ok', 'searchCount' => count($searchResult), 'searchResult' => $searchResult], Response::HTTP_OK);
     }
 
 }
