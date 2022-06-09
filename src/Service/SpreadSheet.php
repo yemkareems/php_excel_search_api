@@ -173,6 +173,6 @@ class SpreadSheet
             $convertedMaxGB = $maxMatches[2] === 'TB' ? 1024 * $maxMatches[1]: $maxMatches[1];
         }
 
-        return ($convertedMinGB <= $computedStorage) && ($computedStorage <= $convertedMaxGB) ? 1:0;
+        return ($convertedMinGB <= $computedStorage) && ($computedStorage <= $convertedMaxGB) ? 1 : 0;
     }
 }
