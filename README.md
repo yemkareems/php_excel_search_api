@@ -24,31 +24,41 @@ Response json will have a success or error key based on the condition. If it is 
 
 Browse
 
-http://127.0.0.1:8000/xlsx?ram[]=16GB&ram[]=32GB&location=San%20FranciscoSFO-12&diskType=SATA&storageFrom=1TB&storageTo=2TB
+https://yemkareems.000webhostapp.com/xlsx?ram[]=16GB&ram[]=32GB&location=San%20FranciscoSFO-12&diskType=SATA&storageFrom=1TB&storageTo=2TB
 
 Sample Response
 
 {"success":"ok","data":[["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$121.99"],["DL20G9Intel Xeon E3-1270v5","16GBDDR4","2x1TBSATA2","San FranciscoSFO-12","$135.99"],["DL20G9Intel Xeon E3-1270v5","16GBDDR4","2x1TBSATA2","San FranciscoSFO-12","$135.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$225.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$220.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$151.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$255.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$250.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$127.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$226.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$231.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$288.79"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$392.79"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$387.79"]]}
 
-http://127.0.0.1:8000/xlsx?storageFrom=100TB
+https://yemkareems.000webhostapp.com/xlsx?storageFrom=100TB
 
 {"error":"No data found for the search"}
 
-http://127.0.0.1:8000/xlsx?storageFrom=
+https://yemkareems.000webhostapp.com/xlsx?storageFrom=
 
 {"error":{"[storageFrom]":["The value you selected is not a valid choice."]}}
 
-http://127.0.0.1:8000/xlsx?ram[]=16GB&ram[]=32GB
+https://yemkareems.000webhostapp.com/xlsx?ram=4GB
 
-http://127.0.0.1:8000/xlsx?location=AmsterdamAMS-01
+{"error":{"[ram]":["This value should be of type array."]}}
 
-http://127.0.0.1:8000/xlsx?diskType=SSD
+https://yemkareems.000webhostapp.com/xlsx?ram[]=4GB&ram[]=9GB
 
-http://127.0.0.1:8000/xlsx?storageFrom=250GB&storageTo=1TB
+{"error":{"[ram]":["One or more of the given values is invalid."]}}
 
-http://127.0.0.1:8000/xlsx?storageTo=1TB
+https://yemkareems.000webhostapp.com/xlsx?ram[]=4GB
 
-http://127.0.0.1:8000/xlsx?storageFrom=500GB
+{"success":"ok","searchResult":[["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","\u20ac39.99"],["Dell R210-IIIntel G530","4GBDDR3","2x500GBSATA2","AmsterdamAMS-01","\u20ac35.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","\u20ac163.99"],["Dell R210-IIIntel G530","4GBDDR3","2x500GBSATA2","AmsterdamAMS-01","\u20ac60.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","\u20ac80.99"],["Dell R210-IIIntel G530","4GBDDR3","2x500GBSATA2","AmsterdamAMS-01","\u20ac40.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","\u20ac60.99"],["Dell R210-IIIntel G530","4GBDDR3","2x500GBSATA2","AmsterdamAMS-01","\u20ac174.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","\u20ac194.99"],["HP DL120G7Intel G850","4GBDDR3","4x500GBSATA2","AmsterdamAMS-01","\u20ac1775.99"],["HP DL120G6Intel G6950","4GBDDR3","4x500GBSATA2","Washington D.C.WDC-01","$49.99"],["HP DL120G6Intel G6950","4GBDDR3","4x500GBSATA2","Washington D.C.WDC-01","$43.99"],["Dell R5102x Intel Xeon E5504","4GBDDR3","4x1TBSATA2","Washington D.C.WDC-01","$104.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","SingaporeSIN-11","S$119.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","Washington D.C.WDC-01","$97.99"],["HP DL120G6Intel G6950","4GBDDR3","4x500GBSATA2","Washington D.C.WDC-01","$79.99"],["HP DL120G6Intel G6950","4GBDDR3","4x500GBSATA2","Washington D.C.WDC-01","$55.99"],["Dell R5102x Intel Xeon E5504","4GBDDR3","4x1TBSATA2","Washington D.C.WDC-01","$110.99"],["HP DL120G6Intel Xeon X3440","4GBDDR3","2x500GBSATA2","Washington D.C.WDC-01","$236.79"],["HP DL120G6Intel G6950","4GBDDR3","4x500GBSATA2","Washington D.C.WDC-01","$216.79"],["Dell R5102x Intel Xeon E5504","4GBDDR3","4x1TBSATA2","Washington D.C.WDC-01","$271.79"]]}
+
+https://yemkareems.000webhostapp.com/xlsx?location=AmsterdamAMS-01
+
+https://yemkareems.000webhostapp.com/xlsx?diskType=SSD
+
+https://yemkareems.000webhostapp.com/xlsx?storageFrom=250GB&storageTo=1TB
+
+https://yemkareems.000webhostapp.com/xlsx?storageTo=1TB
+
+https://yemkareems.000webhostapp.com/xlsx?storageFrom=500GB
 
 Change the search criteria above to search from the list
 
