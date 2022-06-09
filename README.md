@@ -30,6 +30,10 @@ Sample Response
 
 {"success":"ok","searchCount":14,"searchResult":[["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$121.99"],["DL20G9Intel Xeon E3-1270v5","16GBDDR4","2x1TBSATA2","San FranciscoSFO-12","$135.99"],["DL20G9Intel Xeon E3-1270v5","16GBDDR4","2x1TBSATA2","San FranciscoSFO-12","$135.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$225.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$220.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$151.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$255.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$250.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$127.99"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$226.99"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$231.99"],["Dell R210-IIIntel Xeon E3-1270v2","16GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$288.79"],["HP DL380pG82x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$392.79"],["IBM X3650M42x Intel Xeon E5-2620","32GBDDR3","2x1TBSATA2","San FranciscoSFO-12","$387.79"]]}
 
+https://yemkareems.000webhostapp.com/xlsx?diskType=SAS&location=FrankfurtFRA-10
+
+{"success":"ok","searchCount":3,"searchResult":[["HP DL380eG82x Intel Xeon E5-2420","32GBDDR3","8x300GBSAS","FrankfurtFRA-10","\u20ac176.99"],["HP DL180G62x Intel Xeon E5620","32GBDDR3","8x300GBSAS","FrankfurtFRA-10","\u20ac166.99"],["HP DL180G62x Intel Xeon E5620","32GBDDR3","8x300GBSAS","FrankfurtFRA-10","\u20ac280.99"]]}
+
 https://yemkareems.000webhostapp.com/xlsx?storageFrom=100TB
 
 {"error":"No data found for the search"}
