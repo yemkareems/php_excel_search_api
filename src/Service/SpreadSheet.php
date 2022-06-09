@@ -156,7 +156,7 @@ class SpreadSheet
      * @return int
      */
     private function getStorageRangeResult(int $computedStorage, string $compStorageType, ? string $minVal, ? string $maxVal): int {
-        $result = false;
+
         preg_match("/^(\d+)(GB|TB)/", $minVal, $minMatches);
         preg_match("/^(\d+)(GB|TB)/", $maxVal, $maxMatches);
         /**
