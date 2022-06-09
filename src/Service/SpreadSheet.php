@@ -63,31 +63,17 @@ class SpreadSheet
         }
         foreach ($values as $va) {
             $ram = $va[1]; $storage = $va[2]; $location = $va[3];
-            preg_match ('/^(\\d+GB).*/', $ram, $matches);
             $includeInResult = 0;
             //ram filter
-            if(isset($searchParams['ram']) && isset($matches[1])) {
-                if(in_array($matches[1], $searchParams['ram'])) {
-                    $includeInResult++;
-                }
-            }
+            $includeInResult += $this->isRamMatching($ram, $searchParams);
             //location filter
-            if(isset($searchParams['location']) && strstr($location, $searchParams['location'])) {
-                $includeInResult++;
-            }
+            $includeInResult += $this->isLocationMatching($location, $searchParams);
             preg_match("/(.*)(TB|GB)(.*)/", $storage, $minMatches);
             if($minMatches) {
                 //disk type filter
-                if(isset($searchParams['diskType']) && strstr($minMatches[3], $searchParams['diskType'])) {
-                    $includeInResult++;
-                }
+                $includeInResult += $this->isDiskTypeMatching($minMatches, $searchParams);
                 //storage filter
-                if(isset($searchParams['storageFrom']) || isset($searchParams['storageTo'])) {
-                    $storageFilter = $this->filterStorage($minMatches, $searchParams['storageFrom'], $searchParams['storageTo']);
-                    if ($storageFilter) {
-                        $includeInResult++;
-                    }
-                }
+                $includeInResult += $this->isStorageMatching($minMatches, $searchParams['storageFrom'], $searchParams['storageTo']);
             }
             if($includeInResult == $searchKeysCount) {
                 $ret[] = [$va[0], $va[1], $va[2], $va[3], $va[4]];
@@ -98,13 +84,41 @@ class SpreadSheet
     }
 
     /**
+     * @param string $ram
+     * @param array $searchParams
+     * @return int
+     */
+    private function isRamMatching(string $ram, array $searchParams): int {
+        preg_match ('/^(\\d+GB).*/', $ram, $matches);
+        return isset($searchParams['ram']) && isset($matches[1]) && in_array($matches[1], $searchParams['ram']) ? 1: 0;
+    }
+
+    /**
+     * @param string $location
+     * @param array $searchParams
+     * @return int
+     */
+    private function isLocationMatching(string $location, array $searchParams): int {
+        return isset($searchParams['location']) && strstr($location, $searchParams['location']) ? 1 : 0;
+    }
+
+    /**
+     * @param array $minMatches
+     * @param array $searchParams
+     * @return int
+     */
+    private function isDiskTypeMatching(array $minMatches, array $searchParams): int {
+        return isset($searchParams['diskType']) && strstr($minMatches[3], $searchParams['diskType']) ? 1: 0;
+    }
+
+    /**
      * Check if storage falls in the given range
      * @param array $matches
      * @param string|null $minVal
      * @param string|null $maxVal
-     * @return bool
+     * @return int
      */
-    private function filterStorage(array $matches, ? string $minVal, ? string $maxVal): bool {
+    private function isStorageMatching(array $matches, ? string $minVal, ? string $maxVal): int {
 
         $minVal = is_null($minVal) ? '0GB' : $minVal;
         $computedStorage = $this->computeStorage($matches[1]);
@@ -136,12 +150,13 @@ class SpreadSheet
      * @param string $compStorageType
      * @param null|string $minVal
      * @param null|string $maxVal
-     * @return bool
+     * @return int
      */
-    private function getStorageRangeResult(int $computedStorage, string $compStorageType, ? string $minVal, ? string $maxVal): bool {
-        $result = false;
+    private function getStorageRangeResult(int $computedStorage, string $compStorageType, ? string $minVal, ? string $maxVal): int {
+        $result = 0;
         preg_match("/^(\d+)(GB|TB)/", $minVal, $minMatches);
         preg_match("/^(\d+)(GB|TB)/", $maxVal, $maxMatches);
+
         /**
          * Convert the computed storage to GB
          */
@@ -150,35 +165,21 @@ class SpreadSheet
         /**
          * Convert TB to GB
          */
-        $convertedMinGB = $minMatches[1];
         $convertedMaxGB = $maxMatches[1] ?? 0;
-        if (isset($minMatches[1]) && isset($minMatches[2])) {
-            $convertedMinGB = $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
-        }
-        if (isset($maxMatches[1]) && isset($maxMatches[2])) {
+        $convertedMinGB = isset($minMatches[1]) && isset($minMatches[2]) && $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
+        if(isset($maxMatches[1]) && isset($maxMatches[2])) {
             $convertedMaxGB = $maxMatches[2] === 'TB' ? 1024 * $maxMatches[1]: $maxMatches[1];
         }
+
         /**
          * If the min range is in GB
          */
-        $result = $computedStorage >= $convertedMinGB;
+        $result = $computedStorage >= $convertedMinGB ? 1 : 0;
 
         /**
          * if the max range is in GB
          */
-        if ($convertedMaxGB === 0) {
-            if ($result && (isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
-                $result = true;
-            }
-        } else {
-            if ($result && $computedStorage <= $convertedMaxGB) {
-                $result = true;
-            } else {
-                $result = false;
-            }
-        }
-
-        return $result;
+        return $convertedMaxGB && $result && $computedStorage <= $convertedMaxGB ? 1 : 0;
     }
 
 }
