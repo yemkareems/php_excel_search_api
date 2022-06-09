@@ -72,7 +72,6 @@ class SpreadSheet
             if($minMatches) {
                 //disk type filter
                 $includeInResult += $this->isDiskTypeMatching($minMatches, $searchParams);
-
                 //storage filter
                 if(isset($searchParams['storageFrom']) || isset($searchParams['storageTo'])) {
                     $includeInResult += $this->isStorageMatching($minMatches, $searchParams['storageFrom'], $searchParams['storageTo']);
@@ -168,14 +167,12 @@ class SpreadSheet
         /**
          * Convert TB to GB
          */
-        $convertedMinGB = $minMatches[1];
         $convertedMaxGB = $maxMatches[1] ?? 0;
-        if (isset($minMatches[1]) && isset($minMatches[2])) {
-            $convertedMinGB = $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
-        }
-        if (isset($maxMatches[1]) && isset($maxMatches[2])) {
+        $convertedMinGB = isset($minMatches[1]) && isset($minMatches[2]) && $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
+        if(isset($maxMatches[1]) && isset($maxMatches[2])) {
             $convertedMaxGB = $maxMatches[2] === 'TB' ? 1024 * $maxMatches[1]: $maxMatches[1];
         }
+
         /**
          * If the min range is in GB
          */
@@ -184,12 +181,12 @@ class SpreadSheet
         /**
          * if the max range is in GB
          */
-        if ($convertedMaxGB === 0) {
-            if ($result && (isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
+        if($convertedMaxGB === 0) {
+            if($result && (isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
                 $result = true;
             }
         } else {
-            if ($result && $computedStorage <= $convertedMaxGB) {
+            if($result && $computedStorage <= $convertedMaxGB) {
                 $result = true;
             } else {
                 $result = false;
