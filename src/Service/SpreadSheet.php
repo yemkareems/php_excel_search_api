@@ -167,32 +167,12 @@ class SpreadSheet
         /**
          * Convert TB to GB
          */
-        $convertedMaxGB = $maxMatches[1] ?? 0;
+        $convertedMaxGB = $maxMatches[1] ?? 100*1024;
         $convertedMinGB = isset($minMatches[1]) && isset($minMatches[2]) && $minMatches[2] === 'TB' ? 1024 * $minMatches[1]: $minMatches[1];
         if(isset($maxMatches[1]) && isset($maxMatches[2])) {
             $convertedMaxGB = $maxMatches[2] === 'TB' ? 1024 * $maxMatches[1]: $maxMatches[1];
         }
 
-        /**
-         * If the min range is in GB
-         */
-        $result = $computedStorage >= $convertedMinGB;
-
-        /**
-         * if the max range is in GB
-         */
-        if($convertedMaxGB === 0) {
-            if($result && (isset($maxMatches[1])) && $computedStorage <= $maxMatches[1]) {
-                $result = true;
-            }
-        } else {
-            if($result && $computedStorage <= $convertedMaxGB) {
-                $result = true;
-            } else {
-                $result = false;
-            }
-        }
-
-        return $result == true ? 1 : 0;
+        return ($convertedMinGB <= $computedStorage) && ($computedStorage <= $convertedMaxGB) ? 1:0;
     }
 }
