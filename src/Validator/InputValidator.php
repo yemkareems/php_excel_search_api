@@ -6,6 +6,10 @@ use Symfony\Component\Validator\Validation;
 
 class InputValidator
 {
+    /**
+     * @param array $validateInput
+     * @return array
+     */
     public function validate(array $validateInput): array
     {
         $storageValues = ['0GB', '250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB', '100TB'];
