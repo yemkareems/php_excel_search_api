@@ -21,6 +21,9 @@ namespace App\Tests;
 
 
 use App\Service\SpreadSheet;
+use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Common\Exception\UnsupportedTypeException;
+use Box\Spout\Reader\Exception\ReaderNotOpenedException;
 use PHPUnit\Framework\TestCase;
 
 class ReadSpreadSheetTest extends TestCase
@@ -34,7 +37,11 @@ class ReadSpreadSheetTest extends TestCase
     }
 
 
-
+    /**
+     * @throws UnsupportedTypeException
+     * @throws ReaderNotOpenedException
+     * @throws IOException
+     */
     public function testReadFileWithRamFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
@@ -49,6 +56,11 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($data, $expectedResult);
     }
 
+    /**
+     * @throws ReaderNotOpenedException
+     * @throws UnsupportedTypeException
+     * @throws IOException
+     */
     public function testReadFileWithStorageFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
@@ -63,6 +75,11 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($expectedResult, $data);
     }
 
+    /**
+     * @throws UnsupportedTypeException
+     * @throws ReaderNotOpenedException
+     * @throws IOException
+     */
     public function testReadFileHarddiskFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
@@ -77,6 +94,11 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($expectedResult, $data);
     }
 
+    /**
+     * @throws UnsupportedTypeException
+     * @throws ReaderNotOpenedException
+     * @throws IOException
+     */
     public function testReadFileWithLocationFilter() {
         $absPathOfFile = __DIR__ . '/'. self::TEST_DATA_SOURCE;
         $params = [
@@ -91,6 +113,11 @@ class ReadSpreadSheetTest extends TestCase
         $this->assertEquals($expectedResult, $data);
     }
 
+    /**
+     * @throws ReaderNotOpenedException
+     * @throws UnsupportedTypeException
+     * @throws IOException
+     */
     public function testReadFileWithAllFilter()
     {
         $absPathOfFile = __DIR__ . '/' . self::TEST_DATA_SOURCE;
