@@ -55,7 +55,11 @@ class SpreadSheet
             $reader = ReaderEntityFactory::createReaderFromFile($dataSource . $file);
             $reader->open($dataSource . $file);
             foreach ($reader->getSheetIterator() as $sheet) {
-                foreach ($sheet->getRowIterator() as $row) {
+                foreach ($sheet->getRowIterator() as $key => $row) {
+                    if ($key == 1) {
+                        //"Skipping Headers row";
+                        continue;
+                    }
                     $values[] = $row->toArray();
                 }
             }
