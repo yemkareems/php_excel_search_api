@@ -42,6 +42,18 @@ https://yemkareems.000webhostapp.com/xlsx?storageFrom=
 
 {"error":{"[storageFrom]":["The value you selected is not a valid choice."]}}
 
+Possible values for search query params
+
+`
+'storageFrom' => ['0GB', '250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB', '100TB'],
+'storageTo' => ['0GB', '250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB', '100TB'],
+'ram' => ['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB', '128GB'],
+//for ram mulitple is possible like ram[]=4GB&ram[]=8GB
+'diskType' => ['SAS', 'SATA', 'SSD'],
+'location' => ['AmsterdamAMS-01', 'DallasDAL-10', 'FrankfurtFRA-10', 'Hong KongHKG-10', 'San FranciscoSFO-12', 'SingaporeSIN-11', 'Washington D.C.WDC-01'],
+));
+`
+
 https://yemkareems.000webhostapp.com/xlsx?ram=4GB
 
 {"error":{"[ram]":["This value should be of type array."]}}
