@@ -81,7 +81,7 @@ class SpreadSheet
                     $includeInResult += $this->isStorageMatching($minMatches, $searchParams['storageFrom'], $searchParams['storageTo']);
                 }
             }
-            if($includeInResult == $searchKeysCount) {
+            if($includeInResult == $searchKeysCount && $searchKeysCount) {
                 $searchResults[] = [$va[0], $va[1], $va[2], $va[3], $va[4]];
             }
         }

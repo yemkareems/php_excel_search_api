@@ -31,20 +31,21 @@ class SearchController extends AbstractController
 
         $errorMessages = $validator->validate($searchParams);
 
-        if ($errorMessages) {
+        if (count($errorMessages)) {
             return new JsonResponse(["error" => $errorMessages], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        $dataSource = getcwd().'/../'.$this->getParameter('dataSource').'/';
+        $dataSource = getcwd() . '/../' . $this->getParameter('dataSource') . '/';
         try {
             $searchResult = $spreadSheetService->searchDataSource($searchParams, $dataSource);
-            if(0 === count($searchResult)) {
-                return new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $returnSearchResponse = new JsonResponse(['success' => 'ok', 'searchCount' => count($searchResult), 'searchResult' => $searchResult], Response::HTTP_OK);
+            if (0 === count($searchResult)) {
+                $returnSearchResponse = new JsonResponse(['error' => 'No data found for the search'], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } catch (\Exception $e) {
-            return new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $returnSearchResponse = new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return new JsonResponse(['success' => 'ok', 'searchCount' => count($searchResult), 'searchResult' => $searchResult], Response::HTTP_OK);
+       return $returnSearchResponse;
     }
 
 }
