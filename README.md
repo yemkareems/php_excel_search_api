@@ -54,6 +54,10 @@ Possible values for search query params
 ));
 `
 
+https://yemkareems.000webhostapp.com/xlsx?ram[]=96GB
+
+{"success":"ok","searchCount":1,"searchResult":[["Dell R6202x Intel Xeon E5-2650","96GBDDR3","8x120GBSSD","AmsterdamAMS-01","\u20ac191.99"]]}
+
 https://yemkareems.000webhostapp.com/xlsx?ram=4GB
 
 {"error":{"[ram]":["This value should be of type array."]}}
@@ -74,7 +78,11 @@ https://yemkareems.000webhostapp.com/xlsx?storageFrom=250GB&storageTo=1TB
 
 https://yemkareems.000webhostapp.com/xlsx?storageTo=1TB
 
+If storageTo alone is given, default storageFrom is 0GB
+
 https://yemkareems.000webhostapp.com/xlsx?storageFrom=500GB
+
+If strogeFrom alone is given, default storageTo is 100TB
 
 Change the search criteria above to search from the list
 
