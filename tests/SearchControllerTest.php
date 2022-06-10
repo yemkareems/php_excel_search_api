@@ -127,9 +127,5 @@ class SearchControllerTest extends WebTestCase
         $content = json_decode($response->getContent());
         $this->assertEquals(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
         $this->assertEquals('No data found for the search', $content->error);
-
     }
-
-
-
 }
