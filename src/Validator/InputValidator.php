@@ -26,7 +26,7 @@ class InputValidator
         $violations = $validator->validate($validateInput, $constraints);
         if($violations->count() > 0){
             foreach ($violations as $violation) {
-                $messages[$violation->getPropertyPath()][] = $violation->getMessage();
+                $messages[substr($violation->getPropertyPath(), 1, -1)] = $violation->getMessage();
             }
         }
 

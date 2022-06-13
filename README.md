@@ -40,7 +40,7 @@ https://yemkareems.000webhostapp.com/xlsx?storageFrom=100TB
 
 https://yemkareems.000webhostapp.com/xlsx?storageFrom=
 
-{"error":{"[storageFrom]":["The value you selected is not a valid choice."]}}
+{"error":{"storageFrom":"The value you selected is not a valid choice."}}
 
 Possible values for search query params
 
@@ -60,11 +60,11 @@ https://yemkareems.000webhostapp.com/xlsx?ram[]=96GB
 
 https://yemkareems.000webhostapp.com/xlsx?ram=4GB
 
-{"error":{"[ram]":["This value should be of type array."]}}
+{"error":{"ram":"This value should be of type array."}}
 
 https://yemkareems.000webhostapp.com/xlsx?ram[]=4GB&ram[]=9GB
 
-{"error":{"[ram]":["One or more of the given values is invalid."]}}
+{"error":{"ram":"One or more of the given values is invalid."}}
 
 https://yemkareems.000webhostapp.com/xlsx?ram[]=4GB
 
