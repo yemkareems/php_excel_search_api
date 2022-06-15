@@ -137,6 +137,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertEquals('ok', $content->success);
         $this->assertEquals(0, $content->searchCount);
         $this->assertCount(1, $content->searchResult);
+        $this->assertEquals(['Model','RAM','Hard Disk Drive','Location','Price'], $content->searchResult[0]);
     }
 
     public function testAllSearchParamsResultIsOk()
