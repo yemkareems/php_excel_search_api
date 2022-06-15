@@ -126,8 +126,9 @@ class SearchControllerTest extends WebTestCase
         $this->client->request('GET', '/xlsx?storageFrom=100TB');
         $response = $this->client->getResponse();
         $content = json_decode($response->getContent());
-        $this->assertEquals(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
-        $this->assertEquals('No data found for the search', $content->error);
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals(0, $content->searchCount);
+        $this->assertEquals(1, count($content->searchResult));
     }
 
     public function testAllSearchParamsResultIsOk()

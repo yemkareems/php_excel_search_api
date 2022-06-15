@@ -52,7 +52,7 @@ class ReadSpreadSheetTest extends TestCase
             'location' => null,
         ];
         $data = $this->readSheet->searchDataSource($params, $absPathOfFile);
-        $expectedResult = [["RH2288v32x Intel Xeon E5-2620v4","64GBDDR4","4x2TBSATA2","AmsterdamAMS-01","€161.99"],["HP DL380pG82x Intel Xeon E5-2650","64GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€179.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
+        $expectedResult = [["Model","RAM","Hard Disk Drive","Location","Price"],["RH2288v32x Intel Xeon E5-2620v4","64GBDDR4","4x2TBSATA2","AmsterdamAMS-01","€161.99"],["HP DL380pG82x Intel Xeon E5-2650","64GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€179.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"]];
         $this->assertEquals($data, $expectedResult);
     }
 
@@ -71,7 +71,7 @@ class ReadSpreadSheetTest extends TestCase
             'location' => null,
         ];
         $data = $this->readSheet->searchDataSource($params, $absPathOfFile);
-        $expectedResult = [["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["Dell R210-IIIntel Xeon E3-1230v2","16GBDDR3","2x2TBSATA2","FrankfurtABC-01","€72.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
+        $expectedResult = [["Model","RAM","Hard Disk Drive","Location","Price"],["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["Dell R210-IIIntel Xeon E3-1230v2","16GBDDR3","2x2TBSATA2","FrankfurtABC-01","€72.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
         $this->assertEquals($expectedResult, $data);
     }
 
@@ -90,7 +90,7 @@ class ReadSpreadSheetTest extends TestCase
             'location' => null,
         ];
         $data = $this->readSheet->searchDataSource($params, $absPathOfFile);
-        $expectedResult = [["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["Dell R730XD2x Intel Xeon E5-2667v4","128GBDDR4","2x120GBSSD","SingaporeSIN-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2670v3","128GBDDR4","2x120GBSSD","AmsterdamAMS-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
+        $expectedResult = [["Model","RAM","Hard Disk Drive","Location","Price"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["Dell R730XD2x Intel Xeon E5-2667v4","128GBDDR4","2x120GBSSD","SingaporeSIN-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2670v3","128GBDDR4","2x120GBSSD","AmsterdamAMS-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
         $this->assertEquals($expectedResult, $data);
     }
 
@@ -109,7 +109,7 @@ class ReadSpreadSheetTest extends TestCase
             'location' => 'AmsterdamAMS-01',
         ];
         $data = $this->readSheet->searchDataSource($params, $absPathOfFile);
-        $expectedResult = [["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["HP DL180G62x Intel Xeon E5620","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€119.00"],["HP DL380eG82x Intel Xeon E5-2420","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€131.99"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["RH2288v32x Intel Xeon E5-2620v4","64GBDDR4","4x2TBSATA2","AmsterdamAMS-01","€161.99"],["HP DL380pG82x Intel Xeon E5-2650","64GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€179.99"],["IBM X36302x Intel Xeon E5620","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€106.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"],["Dell R730XD2x Intel Xeon E5-2670v3","128GBDDR4","2x120GBSSD","AmsterdamAMS-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
+        $expectedResult = [["Model","RAM","Hard Disk Drive","Location","Price"],["Dell R210Intel Xeon X3440","16GBDDR3","2x2TBSATA2","AmsterdamAMS-01","€49.99"],["HP DL180G62x Intel Xeon E5620","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€119.00"],["HP DL380eG82x Intel Xeon E5-2420","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€131.99"],["RH2288v32x Intel Xeon E5-2650V4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€227.99"],["RH2288v32x Intel Xeon E5-2620v4","64GBDDR4","4x2TBSATA2","AmsterdamAMS-01","€161.99"],["HP DL380pG82x Intel Xeon E5-2650","64GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€179.99"],["IBM X36302x Intel Xeon E5620","32GBDDR3","8x2TBSATA2","AmsterdamAMS-01","€106.99"],["HP DL120G7Intel G850","4GBDDR3","4x1TBSATA2","AmsterdamAMS-01","€39.99"],["Dell R730XD2x Intel Xeon E5-2670v3","128GBDDR4","2x120GBSSD","AmsterdamAMS-01","€364.99"],["Dell R730XD2x Intel Xeon E5-2650v3","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€279.99"],["Dell R730XD2x Intel Xeon E5-2650v4","128GBDDR4","4x480GBSSD","AmsterdamAMS-01","€286.99"]];
         $this->assertEquals($expectedResult, $data);
     }
 
@@ -130,7 +130,7 @@ class ReadSpreadSheetTest extends TestCase
         ];
         $data = $this->readSheet->searchDataSource($params, $absPathOfFile);
 
-        $expected = [["Dell R730XD2x Intel Xeon E5-2667v4","128GBDDR4","2x120GBSSD","SingaporeSIN-01","€364.99"]];
+        $expected = [["Model","RAM","Hard Disk Drive","Location","Price"],["Dell R730XD2x Intel Xeon E5-2667v4","128GBDDR4","2x120GBSSD","SingaporeSIN-01","€364.99"]];
         $this->assertEquals($expected, $data);
     }
 
