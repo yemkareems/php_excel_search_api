@@ -36,7 +36,7 @@ https://yemkareems.000webhostapp.com/xlsx?diskType=SAS&location=FrankfurtFRA-10
 
 https://yemkareems.000webhostapp.com/xlsx?storageFrom=100TB
 
-{"error":"No data found for the search"}
+{"success":"ok","searchCount":0,"searchResult":[["Model","RAM","Hard Disk Drive","Location","Price"]]}
 
 https://yemkareems.000webhostapp.com/xlsx?storageFrom=
 
