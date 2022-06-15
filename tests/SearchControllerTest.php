@@ -128,7 +128,7 @@ class SearchControllerTest extends WebTestCase
         $content = json_decode($response->getContent());
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $this->assertEquals(0, $content->searchCount);
-        $this->assertEquals(1, count($content->searchResult));
+        $this->assertCount(1, $content->searchResult);
     }
 
     public function testAllSearchParamsResultIsOk()
