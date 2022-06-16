@@ -23,7 +23,7 @@ class SpreadSheet
      */
     public function searchDataSource($searchParams, $dataSource): array {
         $filesList = array_values(array_diff(scandir($dataSource), array('.', '..')));
-        $searchResults[] = ["Model", "RAM", "Hard Disk Drive", "Location", "Price"];
+        $searchResults = [];
         $searchKeysCount = 0;
         foreach ($searchParams as $key => $searchValue) {
             if(isset($searchValue) && $searchValue != '' && $key != 'storageTo') {
@@ -35,6 +35,9 @@ class SpreadSheet
         }
         $values = [];
         foreach ($filesList as $file) {
+            if(is_dir($dataSource. $file)) {
+                continue;
+            }
             $reader = ReaderEntityFactory::createReaderFromFile($dataSource . $file);
             $reader->open($dataSource . $file);
             foreach ($reader->getSheetIterator() as $sheet) {

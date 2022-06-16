@@ -23,7 +23,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsInt($content->searchCount);
         $this->assertIsArray($content->searchResult);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
     public function testMultiRamSearchResponseIsOk()
@@ -35,7 +35,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsInt($content->searchCount);
         $this->assertIsArray($content->searchResult);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
     public function testRamSearchResponseIsNotOk()
@@ -53,7 +53,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsInt($content->searchCount);
         $this->assertIsArray($content->searchResult);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
     public function testLocationSearchResponseIsNotOk()
@@ -71,7 +71,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsArray($content->searchResult);
         $this->assertIsInt($content->searchCount);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
     public function testDiskTypeSearchResponseIsNotOk()
@@ -89,7 +89,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsArray($content->searchResult);
         $this->assertIsInt($content->searchCount);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
     public function testStorageFromSearchResponseIsNotOk()
@@ -136,8 +136,8 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsInt($content->searchCount);
         $this->assertEquals('ok', $content->success);
         $this->assertEquals(0, $content->searchCount);
-        $this->assertCount(1, $content->searchResult);
-        $this->assertEquals(['Model','RAM','Hard Disk Drive','Location','Price'], $content->searchResult[0]);
+        $this->assertCount(0, $content->searchResult);
+        $this->assertEquals(['Model','RAM','Hard Disk Drive','Location','Price'], $content->searchHeader);
     }
 
     public function testAllSearchParamsResultIsOk()
@@ -149,7 +149,7 @@ class SearchControllerTest extends WebTestCase
         $this->assertIsArray($content->searchResult);
         $this->assertIsInt($content->searchCount);
         $this->assertEquals('ok', $content->success);
-        $this->assertCount($content->searchCount+1, $content->searchResult);
+        $this->assertCount($content->searchCount, $content->searchResult);
     }
 
 }

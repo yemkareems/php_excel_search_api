@@ -37,7 +37,7 @@ class SearchController extends AbstractController
         $dataSource = getcwd() . '/../' . $this->getParameter('dataSource') . '/';
         try {
             $searchResult = $spreadSheetService->searchDataSource($searchParams, $dataSource);
-            $returnSearchResponse = new JsonResponse(['success' => 'ok', 'searchCount' => count($searchResult) - 1, 'searchResult' => $searchResult], Response::HTTP_OK);
+            $returnSearchResponse = new JsonResponse(['success' => 'ok', 'searchHeader' => ["Model", "RAM", "Hard Disk Drive", "Location", "Price"], 'searchCount' => count($searchResult), 'searchResult' => $searchResult], Response::HTTP_OK);
         } catch (\Exception $e) {
             $returnSearchResponse = new JsonResponse(['error' => 'Error reading the file'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
